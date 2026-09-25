@@ -20,14 +20,14 @@
                 <!-- Sidebar Brand -->
                 <div class="h-16 px-6 flex items-center bg-slate-950 border-b border-slate-800">
                     <div class="flex items-center space-x-3">
-                        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-purple-700 to-indigo-600 flex items-center justify-center shadow">
-                            <svg class="w-5 h-5 text-amber-300" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center shadow">
+                            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 13l-7-3.18V17c0 3.87 3.13 7 7 7s7-3.13 7-7v-5.18L12 15z"/>
                             </svg>
                         </div>
                         <div>
                             <span class="font-bold text-sm tracking-wider text-white">GUNADARMA</span>
-                            <span class="block text-[9px] font-semibold tracking-widest text-slate-400 -mt-1">PERPUSTAKAAN</span>
+                            <span class="block text-[9px] font-semibold tracking-widest text-blue-400 -mt-0.5">PERPUSTAKAAN</span>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                 <!-- Navigation Links -->
                 <nav class="p-4 space-y-1.5">
                     <a href="{{ route('admin.dashboard') }}"
-                       class="flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition {{ request()->routeIs('admin.dashboard') ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                       class="flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition {{ request()->routeIs('admin.dashboard') ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                         </svg>
@@ -43,7 +43,7 @@
                     </a>
 
                     <a href="{{ route('admin.books.index') }}"
-                       class="flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition {{ request()->routeIs('admin.books.*') ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                       class="flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition {{ request()->routeIs('admin.books.*') ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                         </svg>
@@ -51,7 +51,7 @@
                     </a>
 
                     <a href="{{ route('admin.borrowings.index') }}"
-                       class="flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition {{ request()->routeIs('admin.borrowings.*') ? 'bg-purple-600 text-white shadow-sm' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                       class="flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition {{ request()->routeIs('admin.borrowings.*') ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                         </svg>
@@ -64,7 +64,7 @@
             <div class="p-4 border-t border-slate-800 space-y-2">
                 <a href="{{ route('peminjam.catalog.index') }}"
                    class="flex items-center px-4 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800 transition">
-                    <svg class="w-4 h-4 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                     </svg>
@@ -89,27 +89,27 @@
             <header class="h-16 bg-white border-b border-slate-200 px-4 sm:px-8 flex items-center justify-between shadow-2xs">
                 <!-- Breadcrumbs -->
                 <div class="flex items-center space-x-2 text-sm text-slate-500">
-                    <a href="{{ route('admin.dashboard') }}" class="hover:text-purple-700">Home</a>
+                    <a href="{{ route('admin.dashboard') }}" class="hover:text-blue-600">Home</a>
                     @if(isset($breadcrumb))
                         <span>/</span>
-                        <span class="font-medium text-slate-800">{{ $breadcrumb }}</span>
+                        <span class="font-semibold text-slate-800">{{ $breadcrumb }}</span>
                     @endif
                 </div>
 
                 <!-- Right profile -->
                 <div class="flex items-center space-x-4">
                     <div class="hidden sm:flex items-center space-x-4 mr-2">
-                        <a href="{{ route('peminjam.catalog.index') }}" class="text-xs font-semibold text-slate-600 hover:text-purple-700">Katalog</a>
-                        <a href="{{ route('peminjam.borrowings.history') }}" class="text-xs font-semibold text-slate-600 hover:text-purple-700">Riwayat Saya</a>
+                        <a href="{{ route('peminjam.catalog.index') }}" class="text-xs font-semibold text-slate-600 hover:text-blue-600">Katalog</a>
+                        <a href="{{ route('peminjam.borrowings.history') }}" class="text-xs font-semibold text-slate-600 hover:text-blue-600">Riwayat Saya</a>
                     </div>
 
                     <div class="flex items-center space-x-3 pl-4 border-l border-slate-200">
-                        <div class="w-8 h-8 rounded-full bg-purple-900 text-amber-300 font-bold flex items-center justify-center text-xs shadow-xs">
+                        <div class="w-8 h-8 rounded-full bg-blue-700 text-white font-bold flex items-center justify-center text-xs shadow-xs">
                             AD
                         </div>
                         <div class="hidden sm:block text-left">
                             <div class="text-xs font-bold text-slate-800">{{ Auth::user()->name }}</div>
-                            <div class="text-[10px] font-semibold text-purple-700 uppercase tracking-wider">Administrator</div>
+                            <div class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider">Administrator</div>
                         </div>
                     </div>
                 </div>

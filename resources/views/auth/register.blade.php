@@ -1,10 +1,10 @@
 <x-guest-layout>
-    <div class="mb-6 text-center">
-        <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Pendaftaran Anggota</h2>
-        <p class="text-xs text-slate-500 mt-1">Daftar akun peminjam perpustakaan Gunadarma</p>
+    <div class="mb-5 text-center">
+        <h2 class="text-xl font-bold text-slate-900 tracking-tight">Pendaftaran Anggota</h2>
+        <p class="text-xs text-slate-500 mt-0.5">Daftar akun peminjam perpustakaan Gunadarma</p>
     </div>
 
-    <form method="POST" action="{{ route('register') }}" class="space-y-4">
+    <form method="POST" action="{{ route('register') }}" class="space-y-3.5">
         @csrf
 
         <!-- Name -->
@@ -18,7 +18,7 @@
                    autofocus
                    autocomplete="name"
                    placeholder="Contoh: Budi Sudarsono"
-                   class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition" />
+                   class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition" />
             <x-input-error :messages="$errors->get('name')" class="mt-1" />
         </div>
 
@@ -32,7 +32,7 @@
                    required
                    autocomplete="username"
                    placeholder="nama@gunadarma.ac.id"
-                   class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition" />
+                   class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition" />
             <x-input-error :messages="$errors->get('email')" class="mt-1" />
         </div>
 
@@ -45,7 +45,7 @@
                    required
                    autocomplete="new-password"
                    placeholder="Minimal 8 karakter"
-                   class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition" />
+                   class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition" />
             <x-input-error :messages="$errors->get('password')" class="mt-1" />
         </div>
 
@@ -58,25 +58,25 @@
                    required
                    autocomplete="new-password"
                    placeholder="Ulangi kata sandi"
-                   class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:bg-white transition" />
+                   class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition" />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1" />
         </div>
 
-        <div class="p-3 bg-purple-50 rounded-xl border border-purple-200 text-xs text-purple-900 flex items-center">
-            <svg class="w-4 h-4 text-purple-700 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <div class="p-3 bg-blue-50 rounded-lg border border-blue-200 text-xs text-blue-900 flex items-center">
+            <svg class="w-4 h-4 text-blue-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
             </svg>
-            <span>Akun pendaftaran baru otomatis mendapatkan peran sebagai <strong>Peminjam</strong>.</span>
+            <span>Akun pendaftar baru otomatis mendapatkan peran sebagai <strong>Peminjam</strong>.</span>
         </div>
 
         <button type="submit"
-                class="w-full py-3 px-4 bg-purple-900 hover:bg-purple-800 text-white font-bold rounded-xl text-sm shadow-md transition">
+                class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold rounded-lg text-sm shadow-2xs transition">
             Daftar Sekarang
         </button>
 
-        <div class="text-center pt-2">
-            <a class="text-xs text-slate-500 hover:text-purple-900 font-semibold" href="{{ route('login') }}">
-                Sudah memiliki akun? Masuk disini
+        <div class="text-center pt-1">
+            <a class="text-xs text-slate-500 hover:text-blue-600 font-semibold" href="{{ route('login') }}">
+                Sudah memiliki akun? Masuk
             </a>
         </div>
     </form>
