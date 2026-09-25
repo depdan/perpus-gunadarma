@@ -1,9 +1,9 @@
 @forelse($books as $book)
-    <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-2xs hover:shadow-sm transition duration-150 flex flex-col justify-between group">
+    <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-2xs hover:shadow-md hover:border-sky-300 transition duration-150 flex flex-col justify-between group">
         <div class="flex space-x-4">
-            <!-- Book Cover Thumbnail -->
-            <div class="w-18 h-24 bg-slate-100 border border-slate-200 rounded-lg flex-shrink-0 flex items-center justify-center p-2 group-hover:border-blue-300 transition">
-                <div class="w-full h-full border border-slate-200 rounded flex flex-col items-center justify-center text-slate-400 group-hover:text-blue-600 transition">
+            <!-- Book Cover Thumbnail with subtle gradient border -->
+            <div class="w-18 h-24 bg-gradient-to-br from-sky-50 to-slate-100 border border-slate-200 rounded-lg flex-shrink-0 flex items-center justify-center p-2 group-hover:border-sky-400 transition shadow-inner">
+                <div class="w-full h-full border border-dashed border-sky-200 rounded flex flex-col items-center justify-center text-sky-400 group-hover:text-blue-700 transition">
                     <svg class="w-7 h-7 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                     </svg>
@@ -13,7 +13,7 @@
 
             <!-- Book Info -->
             <div class="flex-1 min-w-0">
-                <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug truncate group-hover:text-blue-600 transition" title="{{ $book->title }}">
+                <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug truncate group-hover:text-blue-700 transition" title="{{ $book->title }}">
                     {{ $book->title }}
                 </h3>
                 <p class="text-xs font-medium text-slate-500 mt-1 truncate">
@@ -21,7 +21,7 @@
                 </p>
 
                 <div class="mt-2.5 flex items-center space-x-2 flex-wrap gap-y-1">
-                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-sky-50 text-sky-800 border border-sky-200">
                         {{ $book->category->name ?? 'Umum' }}
                     </span>
 
@@ -38,14 +38,14 @@
             </div>
         </div>
 
-        <!-- Action Button -->
+        <!-- Action Button with Gradient -->
         <div class="mt-4 pt-3 border-t border-slate-100">
             @if($book->stock > 0)
                 <form method="POST" action="{{ route('peminjam.borrowings.borrow', $book) }}">
                     @csrf
                     <button type="submit"
                             onclick="return confirm('Apakah Anda ingin meminjam buku \'{{ addslashes($book->title) }}\'?')"
-                            class="w-full py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 transition duration-150 shadow-2xs flex items-center justify-center space-x-2 cursor-pointer">
+                            class="w-full py-2 px-3 rounded-lg text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-700 hover:to-blue-800 active:from-sky-800 active:to-blue-900 transition duration-150 shadow-2xs hover:shadow flex items-center justify-center space-x-2 cursor-pointer">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                         </svg>

@@ -16,7 +16,7 @@
                     </div>
 
                     <a href="{{ route('peminjam.catalog.index') }}"
-                       class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold rounded-lg transition shadow-2xs">
+                       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-700 hover:to-blue-800 text-white text-xs sm:text-sm font-semibold rounded-lg transition shadow-2xs">
                         <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                         </svg>
@@ -63,7 +63,7 @@
                                     </td>
                                     <td class="py-3.5 px-4">
                                         @if($borrowing->status === 'dipinjam')
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-600 text-white">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-2xs">
                                                 Dipinjam
                                             </span>
                                         @else
@@ -78,7 +78,7 @@
                                                 @csrf
                                                 <button type="submit"
                                                         onclick="return confirm('Apakah Anda ingin mengembalikan buku \'{{ addslashes($borrowing->book->title ?? '') }}\'?')"
-                                                        class="text-xs font-semibold text-blue-600 hover:text-blue-800 hover:underline px-3 py-1.5 rounded-lg border border-blue-200 bg-blue-50 hover:bg-blue-100 transition cursor-pointer">
+                                                        class="text-xs font-semibold text-blue-600 hover:text-blue-800 hover:underline px-3 py-1.5 rounded-lg border border-sky-200 bg-sky-50/70 hover:bg-sky-100 transition cursor-pointer">
                                                     Kembalikan
                                                 </button>
                                             </form>

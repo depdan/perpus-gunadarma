@@ -2,18 +2,25 @@
     <x-slot name="breadcrumb">Dashboard</x-slot>
 
     <div class="space-y-6">
-        <!-- Header Banner -->
-        <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-blue-900 rounded-2xl p-6 sm:p-7 text-white shadow-xs">
-            <div class="max-w-2xl">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-400/30 mb-2">
+        <!-- Header Banner with Gradient -->
+        <div class="bg-gradient-to-r from-sky-500 via-blue-700 to-indigo-900 rounded-2xl p-6 sm:p-7 text-white shadow-md relative overflow-hidden">
+            <div class="relative z-10 max-w-2xl">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wider bg-white/20 text-white border border-white/30 backdrop-blur-xs mb-2">
                     Panel Administrator
                 </span>
                 <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white">
                     Selamat Datang, {{ Auth::user()->name }}
                 </h1>
-                <p class="text-slate-300 text-sm mt-1">
-                    Sistem Manajemen Sirkulasi Buku & Monitoring Peminjaman Perpustakaan.
+                <p class="text-sky-100 text-sm mt-1">
+                    Sistem Manajemen Sirkulasi Buku & Monitoring Peminjaman Perpustakaan Gunadarma.
                 </p>
+            </div>
+
+            <!-- Emblem Watermark -->
+            <div class="absolute -right-6 -bottom-8 opacity-15 pointer-events-none hidden sm:block">
+                <svg class="w-48 h-48 text-white" viewBox="0 0 64 64" fill="currentColor">
+                    <path d="M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 13l-7-3.18V17c0 3.87 3.13 7 7 7s7-3.13 7-7v-5.18L12 15z"/>
+                </svg>
             </div>
         </div>
 
@@ -26,7 +33,7 @@
                     <p class="text-2xl font-bold text-slate-900 mt-1">{{ $totalBooks }}</p>
                     <p class="text-[11px] text-slate-400 mt-0.5">Koleksi terdaftar</p>
                 </div>
-                <div class="w-11 h-11 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                <div class="w-11 h-11 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                     </svg>
@@ -108,7 +115,7 @@
                                     <td class="py-2.5 text-slate-500">{{ \Carbon\Carbon::parse($row->borrow_date)->format('d M Y') }}</td>
                                     <td class="py-2.5">
                                         @if($row->status === 'dipinjam')
-                                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-600 text-white">Dipinjam</span>
+                                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-2xs">Dipinjam</span>
                                         @else
                                             <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Kembali</span>
                                         @endif
