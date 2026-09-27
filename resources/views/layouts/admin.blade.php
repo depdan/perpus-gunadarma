@@ -26,10 +26,7 @@
                         <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="w-full h-full object-contain rounded-lg">
                     </div>
                     <div class="flex flex-col text-left leading-tight">
-                        <div class="flex items-center space-x-1.5">
-                            <span class="font-extrabold text-sm tracking-wider text-slate-900 uppercase">GUNADARMA</span>
-                            <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded-md bg-royal-700 text-white">ADMIN</span>
-                        </div>
+                        <span class="font-extrabold text-sm tracking-wider text-slate-900 uppercase">GUNADARMA</span>
                         <span class="text-[10px] font-bold tracking-wider uppercase text-royal-700">PANEL SIRKULASI</span>
                     </div>
                 </a>

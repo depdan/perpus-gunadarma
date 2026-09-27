@@ -6,10 +6,7 @@
 
     <!-- Typography -->
     <div class="flex flex-col text-left leading-tight">
-        <div class="flex items-center space-x-1.5">
-            <span class="font-extrabold text-sm tracking-wider text-white uppercase drop-shadow-xs">GUNADARMA</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-ocean-500/30 text-ocean-200 border border-ocean-300/40">LIB</span>
-        </div>
+        <span class="font-extrabold text-sm tracking-wider text-white uppercase drop-shadow-xs">GUNADARMA</span>
         <span class="text-[10px] font-bold tracking-widest uppercase text-ocean-200">PERPUSTAKAAN DIGITAL</span>
     </div>
 </div>
