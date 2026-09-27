@@ -1,7 +1,7 @@
 <x-guest-layout>
-    <div class="mb-5 text-center">
-        <h2 class="text-xl font-bold text-slate-900 tracking-tight">Masuk ke Sistem</h2>
-        <p class="text-xs text-slate-500 mt-0.5">Sistem Informasi Perpustakaan Gunadarma</p>
+    <div class="mb-6 text-center">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Masuk ke Portal</h2>
+        <p class="text-xs text-slate-500 mt-1">Sistem Informasi Perpustakaan Universitas Gunadarma</p>
     </div>
 
     <!-- Session Status -->
@@ -12,68 +12,86 @@
 
         <!-- Email Address -->
         <div>
-            <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Email</label>
-            <input id="email"
-                   type="email"
-                   name="email"
-                   value="{{ old('email') }}"
-                   required
-                   autofocus
-                   autocomplete="username"
-                   placeholder="nama@gunadarma.ac.id"
-                   class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition" />
+            <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Alamat Email</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"/>
+                    </svg>
+                </div>
+                <input id="email"
+                       type="email"
+                       name="email"
+                       value="{{ old('email') }}"
+                       required
+                       autofocus
+                       autocomplete="username"
+                       placeholder="nama@gunadarma.ac.id"
+                       class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium focus:bg-white focus:ring-2 focus:ring-royal-500 focus:border-royal-500 text-slate-900 placeholder-slate-400 transition" />
+            </div>
             <x-input-error :messages="$errors->get('email')" class="mt-1" />
         </div>
 
         <!-- Password -->
         <div>
-            <label for="password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Kata Sandi</label>
-            <input id="password"
-                   type="password"
-                   name="password"
-                   required
-                   autocomplete="current-password"
-                   placeholder="••••••••"
-                   class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition" />
+            <label for="password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Kata Sandi</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                </div>
+                <input id="password"
+                       type="password"
+                       name="password"
+                       required
+                       autocomplete="current-password"
+                       placeholder="••••••••"
+                       class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium focus:bg-white focus:ring-2 focus:ring-royal-500 focus:border-royal-500 text-slate-900 placeholder-slate-400 transition" />
+            </div>
             <x-input-error :messages="$errors->get('password')" class="mt-1" />
         </div>
 
-        <!-- Remember Me -->
-        <div class="flex items-center justify-between text-xs">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-slate-300 text-blue-600 shadow-2xs focus:ring-blue-500" name="remember">
-                <span class="ms-2 text-slate-600">Ingat saya</span>
+        <!-- Remember Me & Register link -->
+        <div class="flex items-center justify-between text-xs pt-1">
+            <label for="remember_me" class="inline-flex items-center cursor-pointer">
+                <input id="remember_me" type="checkbox" class="rounded border-slate-300 text-royal-700 shadow-2xs focus:ring-royal-500" name="remember">
+                <span class="ms-2 text-slate-600 font-medium">Ingat saya</span>
             </label>
 
-            <a href="{{ route('register') }}" class="text-blue-600 hover:text-blue-800 font-semibold">
-                Daftar akun peminjam
+            <a href="{{ route('register') }}" class="text-royal-700 hover:text-royal-800 font-bold hover:underline">
+                Daftar akun baru &rarr;
             </a>
         </div>
 
         <button type="submit"
-                class="w-full py-2.5 px-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold rounded-lg text-sm shadow-2xs transition">
-            Masuk
+                class="w-full py-3 px-4 btn-primary-royal rounded-xl text-xs sm:text-sm font-bold shadow-royal-sm cursor-pointer mt-3">
+            Masuk ke Perpustakaan
         </button>
     </form>
 
-    <!-- Demo Account Helper for Reviewer -->
-    <div class="mt-6 pt-4 border-t border-slate-100 text-xs">
-        <p class="font-bold text-slate-600 mb-2 text-center text-[11px] uppercase tracking-wider">Kredensial Demo:</p>
+    <!-- Demo Account Helper -->
+    <div class="mt-6 pt-5 border-t border-slate-100 text-xs">
+        <p class="font-bold text-slate-400 mb-2.5 text-center text-[10px] uppercase tracking-wider">⚡ Akses Cepat Uji Coba:</p>
         <div class="grid grid-cols-2 gap-2">
             <button type="button"
                     onclick="document.getElementById('email').value='admin@gunadarma.ac.id'; document.getElementById('password').value='password';"
-                    class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-left hover:bg-blue-50 hover:border-blue-200 transition cursor-pointer">
-                <div class="font-bold text-slate-800">👑 Admin</div>
-                <div class="text-[10px] text-slate-600">admin@gunadarma.ac.id</div>
-                <div class="text-[10px] text-slate-400">pass: password</div>
+                    class="p-2.5 bg-slate-50 hover:bg-royal-50 border border-slate-200/80 hover:border-royal-200 rounded-xl text-left transition cursor-pointer">
+                <div class="font-bold text-slate-900 text-xs flex items-center">
+                    <span>👑 Admin</span>
+                </div>
+                <div class="text-[10px] text-slate-500 truncate">admin@gunadarma.ac.id</div>
+                <div class="text-[9px] text-royal-700 font-semibold">pass: password</div>
             </button>
 
             <button type="button"
                     onclick="document.getElementById('email').value='budi@gunadarma.ac.id'; document.getElementById('password').value='password';"
-                    class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-left hover:bg-blue-50 hover:border-blue-200 transition cursor-pointer">
-                <div class="font-bold text-slate-800">👤 Peminjam</div>
-                <div class="text-[10px] text-slate-600">budi@gunadarma.ac.id</div>
-                <div class="text-[10px] text-slate-400">pass: password</div>
+                    class="p-2.5 bg-slate-50 hover:bg-royal-50 border border-slate-200/80 hover:border-royal-200 rounded-xl text-left transition cursor-pointer">
+                <div class="font-bold text-slate-900 text-xs flex items-center">
+                    <span>👤 Peminjam</span>
+                </div>
+                <div class="text-[10px] text-slate-500 truncate">budi@gunadarma.ac.id</div>
+                <div class="text-[9px] text-royal-700 font-semibold">pass: password</div>
             </button>
         </div>
     </div>

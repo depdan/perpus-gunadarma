@@ -1,3 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: #F8FAFC;
+        color: #1e293b;
+    }
+}
+
+/* Primary Button in Royal Blue #1E65DE */
+.btn-primary-royal {
+    background-color: #1E65DE;
+    color: #FFFFFF;
+    font-weight: 700;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary-royal:hover {
+    background-color: #1557BF;
+    box-shadow: 0 4px 14px rgba(30, 101, 222, 0.35);
+    transform: translateY(-1px);
+}
+
+.btn-primary-royal:active {
+    transform: translateY(0);
+}
+
+/* Soft Royal Accent Button */
+.btn-soft-royal {
+    background-color: #E8F0FE;
+    color: #1E65DE;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.btn-soft-royal:hover {
+    background-color: #D2E3FC;
+    color: #1557BF;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #F8FAFC;
+}
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+
+

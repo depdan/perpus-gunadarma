@@ -94,7 +94,9 @@ class LibrarySystemTest extends TestCase
     {
         $initialStock = $this->bookWithStock->stock;
 
-        $response = $this->actingAs($this->peminjam)->post("/katalog/pinjam/{$this->bookWithStock->id}");
+        $response = $this->actingAs($this->peminjam)->post("/katalog/pinjam/{$this->bookWithStock->id}", [
+            'duration' => 7,
+        ]);
 
         $response->assertRedirect(route('peminjam.borrowings.history'));
         $this->assertDatabaseHas('borrowings', [
@@ -103,6 +105,31 @@ class LibrarySystemTest extends TestCase
             'status' => 'dipinjam',
         ]);
 
+        $borrowing = Borrowing::where('user_id', $this->peminjam->id)->where('book_id', $this->bookWithStock->id)->first();
+        $this->assertNotNull($borrowing);
+        $this->assertEquals(now()->addDays(7)->toDateString(), $borrowing->due_date->toDateString());
+        $this->assertEquals($initialStock - 1, $this->bookWithStock->fresh()->stock);
+    }
+
+    public function test_peminjam_can_borrow_book_with_custom_duration(): void
+    {
+        $initialStock = $this->bookWithStock->stock;
+
+        $response = $this->actingAs($this->peminjam)->post("/katalog/pinjam/{$this->bookWithStock->id}", [
+            'duration' => 14,
+        ]);
+
+        $response->assertRedirect(route('peminjam.borrowings.history'));
+        $this->assertDatabaseHas('borrowings', [
+            'user_id' => $this->peminjam->id,
+            'book_id' => $this->bookWithStock->id,
+            'status' => 'dipinjam',
+        ]);
+
+        $borrowing = Borrowing::where('user_id', $this->peminjam->id)->where('book_id', $this->bookWithStock->id)->first();
+        $this->assertNotNull($borrowing);
+        $this->assertEquals(now()->addDays(14)->toDateString(), $borrowing->due_date->toDateString());
+        $this->assertEquals(14, $borrowing->duration_days);
         $this->assertEquals($initialStock - 1, $this->bookWithStock->fresh()->stock);
     }
 

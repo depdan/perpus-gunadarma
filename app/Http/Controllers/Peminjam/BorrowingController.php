@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Peminjam;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Borrowing;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,17 +18,23 @@ class BorrowingController extends Controller
     {
         $user = Auth::user();
 
+        $validated = $request->validate([
+            'duration' => ['nullable', 'integer', 'in:3,7,14,30'],
+        ]);
+
+        $duration = (int) ($validated['duration'] ?? 7);
+
         $activeLoan = Borrowing::where('user_id', $user->id)
             ->where('book_id', $book->id)
             ->where('status', 'dipinjam')
             ->first();
 
         if ($activeLoan) {
-            return redirect()->back()->with('error', 'Anda sedang meminjam buku ini. Harap kembalikan terlebih dahulu sebelum meminjam kembali.');
+            return redirect()->back()->with('error', 'Anda sedang meminjam buku ini. Harap kembalikan terlebih dahulu.');
         }
 
         try {
-            DB::transaction(function () use ($book, $user) {
+            DB::transaction(function () use ($book, $user, $duration) {
                 $lockedBook = Book::where('id', $book->id)->lockForUpdate()->first();
 
                 if (!$lockedBook || $lockedBook->stock <= 0) {
@@ -40,14 +47,14 @@ class BorrowingController extends Controller
                     'user_id' => $user->id,
                     'book_id' => $lockedBook->id,
                     'borrow_date' => now()->toDateString(),
-                    'due_date' => now()->addDays(7)->toDateString(),
+                    'due_date' => now()->addDays($duration)->toDateString(),
                     'status' => 'dipinjam',
-                    'notes' => 'Peminjaman mandiri oleh anggota',
+                    'notes' => "Peminjaman {$duration} hari",
                 ]);
             });
 
             return redirect()->route('peminjam.borrowings.history')
-                ->with('success', "Buku '{$book->title}' berhasil dipinjam! Batas waktu pengembalian 7 hari.");
+                ->with('success', "Buku '{$book->title}' berhasil dipinjam ({$duration} hari).");
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage() ?: 'Gagal melakukan peminjaman buku.');
         }
@@ -56,7 +63,7 @@ class BorrowingController extends Controller
     public function returnBook(Request $request, Borrowing $borrowing): RedirectResponse
     {
         if ($borrowing->user_id !== Auth::id()) {
-            abort(403, 'Anda tidak memiliki akses untuk mengembalikan transaksi peminjaman ini.');
+            abort(403, 'Anda tidak memiliki akses untuk mengembalikan buku ini.');
         }
 
         if ($borrowing->status === 'dikembalikan') {
@@ -77,7 +84,7 @@ class BorrowingController extends Controller
             });
 
             return redirect()->route('peminjam.borrowings.history')
-                ->with('success', "Buku '{$borrowing->book->title}' telah berhasil dikembalikan. Terima kasih!");
+                ->with('success', "Buku '{$borrowing->book->title}' telah berhasil dikembalikan.");
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal memproses pengembalian buku: ' . $e->getMessage());
         }

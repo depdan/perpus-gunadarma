@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -47,5 +48,18 @@ class Borrowing extends Model
     public function isBorrowed(): bool
     {
         return $this->status === 'dipinjam';
+    }
+
+    public function isOverdue(): bool
+    {
+        return $this->status === 'dipinjam' && Carbon::parse($this->due_date)->isPast();
+    }
+
+    public function getDurationDaysAttribute(): int
+    {
+        if (!$this->borrow_date || !$this->due_date) {
+            return 7;
+        }
+        return (int) round(Carbon::parse($this->borrow_date)->diffInDays(Carbon::parse($this->due_date)));
     }
 }
