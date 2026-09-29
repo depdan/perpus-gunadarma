@@ -9,6 +9,8 @@
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         background-color: #F8FAFC;
         color: #1e293b;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }
 
@@ -22,12 +24,14 @@
 
 .btn-primary-royal:hover {
     background-color: #1557BF;
-    box-shadow: 0 4px 14px rgba(30, 101, 222, 0.35);
+    box-shadow: 0 6px 18px rgba(30, 101, 222, 0.35);
     transform: translateY(-1px);
 }
 
 .btn-primary-royal:active {
+    background-color: #0E3E8C;
     transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(30, 101, 222, 0.2);
 }
 
 /* Soft Royal Accent Button */
@@ -35,12 +39,31 @@
     background-color: #E8F0FE;
     color: #1E65DE;
     font-weight: 700;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-soft-royal:hover {
     background-color: #D2E3FC;
     color: #1557BF;
+    transform: translateY(-1px);
+}
+
+.btn-soft-royal:active {
+    transform: translateY(0);
+}
+
+/* Subtle Book Card 3D Spine Effect */
+.book-spine-effect {
+    box-shadow: 
+        inset 4px 0 8px -2px rgba(0, 0, 0, 0.15),
+        2px 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+/* Glassmorphism subtle surface */
+.glass-surface {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 /* Custom minimal scrollbar */
@@ -58,6 +81,3 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #94A3B8;
 }
-
-
-

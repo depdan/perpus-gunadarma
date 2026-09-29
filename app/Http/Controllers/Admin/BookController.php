@@ -32,10 +32,11 @@ class BookController extends Controller
             $query->where('category_id', $request->input('category_id'));
         }
 
-        $books = $query->latest()->paginate(10)->withQueryString();
-        $categories = Category::orderBy('name')->get();
+        $books = $query->orderBy('id', 'asc')->paginate(10)->withQueryString();
+        $categories = Category::withCount('books')->orderBy('name')->get();
+        $totalBooksCount = Book::count();
 
-        return view('admin.books.index', compact('books', 'categories'));
+        return view('admin.books.index', compact('books', 'categories', 'totalBooksCount'));
     }
 
     public function create(): View

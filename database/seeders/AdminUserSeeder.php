@@ -21,9 +21,9 @@ class AdminUserSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'budi@gunadarma.ac.id'],
+            ['email' => 'depdan@gunadarma.ac.id'],
             [
-                'name' => 'Budi Sudarsono',
+                'name' => 'Depdan',
                 'password' => Hash::make('password'),
                 'role' => 'peminjam',
                 'email_verified_at' => now(),

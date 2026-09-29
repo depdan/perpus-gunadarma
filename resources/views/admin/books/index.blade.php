@@ -7,18 +7,18 @@
         <x-flash-messages />
 
         <!-- Header Card -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
                     Database Koleksi Buku
                 </h1>
                 <p class="text-xs sm:text-sm text-slate-500 mt-1">
-                    Tambah, perbarui, dan kelola informasi serta stok fisik buku perpustakaan.
+                    Tambah, perbarui bibliografi, pantau kategori, dan kelola ketersediaan stok fisik buku perpustakaan.
                 </p>
             </div>
 
             <a href="{{ route('admin.books.create') }}"
-               class="btn-primary-royal px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold inline-flex items-center justify-center space-x-2 shadow-royal-sm">
+               class="btn-primary-royal px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold inline-flex items-center justify-center space-x-2 shadow-royal-sm flex-shrink-0">
                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
                 </svg>
@@ -27,7 +27,7 @@
         </div>
 
         <!-- Filter & Search Bar -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs">
+        <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4">
             <form method="GET" action="{{ route('admin.books.index') }}" class="flex flex-col sm:flex-row gap-3">
                 <div class="flex-1 relative">
                     <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -39,17 +39,17 @@
                            name="search"
                            value="{{ request('search') }}"
                            placeholder="Cari judul buku, penulis, penerbit, atau ISBN..."
-                           class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-royal-500 focus:bg-white transition">
+                           class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-royal-500 focus:bg-white transition">
                 </div>
 
                 <div class="sm:w-60">
                     <select name="category_id"
                             onchange="this.form.submit()"
-                            class="w-full py-2.5 px-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-royal-500 focus:bg-white transition">
-                        <option value="">Semua Kategori</option>
+                            class="w-full py-2.5 px-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-royal-500 focus:bg-white transition cursor-pointer">
+                        <option value="">Semua Kategori ({{ $totalBooksCount ?? 0 }})</option>
                         @foreach($categories as $cat)
                             <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>
-                                {{ $cat->name }}
+                                {{ $cat->name }} ({{ $cat->books_count ?? 0 }})
                             </option>
                         @endforeach
                     </select>
@@ -57,26 +57,53 @@
 
                 <div class="flex space-x-2">
                     <button type="submit"
-                            class="btn-primary-royal px-5 py-2.5 rounded-xl text-xs font-bold">
+                            class="btn-primary-royal px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold cursor-pointer">
                         Cari
                     </button>
                     @if(request('search') || request('category_id'))
                         <a href="{{ route('admin.books.index') }}"
-                           class="px-4 py-2.5 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs hover:bg-slate-200 transition flex items-center">
+                           class="px-4 py-2.5 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs sm:text-sm hover:bg-slate-200 transition flex items-center">
                             Reset
                         </a>
                     @endif
                 </div>
             </form>
+
+            <!-- Interactive Category Filter Pills -->
+            <div class="flex items-center space-x-2 overflow-x-auto pt-2 pb-1 text-xs sm:text-sm no-scrollbar border-t border-slate-100">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1 hidden sm:inline flex-shrink-0">
+                    Pilihan Kategori:
+                </span>
+
+                <a href="{{ route('admin.books.index', array_filter(['search' => request('search')])) }}"
+                   class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center space-x-1.5 {{ !request('category_id') ? 'bg-royal-700 text-white shadow-royal-sm ring-2 ring-royal-700/20' : 'bg-slate-100 text-slate-600 hover:bg-royal-50 hover:text-royal-700' }}">
+                    <span class="w-1.5 h-1.5 rounded-full {{ !request('category_id') ? 'bg-royal-300' : 'bg-slate-400' }}"></span>
+                    <span>Semua Kategori</span>
+                    <span class="ml-1 text-[10px] px-1.5 py-0.2 rounded-md {{ !request('category_id') ? 'bg-royal-800 text-royal-100' : 'bg-slate-200 text-slate-600' }}">
+                        {{ $totalBooksCount ?? 0 }}
+                    </span>
+                </a>
+
+                @foreach($categories as $cat)
+                    <a href="{{ route('admin.books.index', array_filter(['search' => request('search'), 'category_id' => $cat->id])) }}"
+                       class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center space-x-1.5 {{ request('category_id') == $cat->id ? 'bg-royal-700 text-white shadow-royal-sm ring-2 ring-royal-700/20' : 'bg-slate-100 text-slate-600 hover:bg-royal-50 hover:text-royal-700' }}">
+                        <span class="w-1.5 h-1.5 rounded-full {{ $cat->dot_color ?? 'bg-royal-500' }}"></span>
+                        <span>{{ $cat->name }}</span>
+                        <span class="ml-1 text-[10px] px-1.5 py-0.2 rounded-md {{ request('category_id') == $cat->id ? 'bg-royal-800 text-royal-100' : 'bg-slate-200 text-slate-600' }}">
+                            {{ $cat->books_count ?? 0 }}
+                        </span>
+                    </a>
+                @endforeach
+            </div>
         </div>
 
         <!-- Books Table Card -->
-        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-slate-200/80 text-left text-sm">
                     <thead class="bg-slate-50/80 text-slate-700 font-bold text-xs uppercase tracking-wider">
                         <tr>
-                            <th class="px-6 py-4 w-16">ID</th>
+                            <th class="px-6 py-4 w-16 text-center">No</th>
                             <th class="px-6 py-4">Judul Buku</th>
                             <th class="px-6 py-4">Penulis & Penerbit</th>
                             <th class="px-6 py-4">Kategori</th>
@@ -87,16 +114,16 @@
                     <tbody class="divide-y divide-slate-100 bg-white">
                         @forelse($books as $book)
                             <tr class="hover:bg-slate-50/60 transition group">
-                                <!-- ID -->
-                                <td class="px-6 py-4 font-mono text-xs font-bold text-royal-700">
-                                    #{{ $book->id }}
+                                <!-- No -->
+                                <td class="px-6 py-4 font-mono text-xs font-extrabold text-royal-700 text-center">
+                                    {{ $books->firstItem() ? ($loop->iteration + $books->firstItem() - 1) : $loop->iteration }}
                                 </td>
 
                                 <!-- Title & Icon -->
                                 <td class="px-6 py-4 whitespace-normal">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-10 rounded-lg bg-royal-50 border border-royal-200/70 text-royal-700 flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="flex items-center space-x-3.5">
+                                        <div class="w-9 h-12 rounded-lg bg-gradient-to-br {{ $book->category?->cover_gradient ?? 'from-royal-700 to-slate-800' }} text-white flex items-center justify-center flex-shrink-0 book-spine-effect shadow-xs">
+                                            <svg class="w-4 h-4 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                                             </svg>
                                         </div>
@@ -113,13 +140,13 @@
 
                                 <!-- Penulis -->
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-xs font-semibold text-slate-700">{{ $book->author }}</div>
+                                    <div class="text-xs font-semibold text-slate-800">{{ $book->author }}</div>
                                     <div class="text-[11px] text-slate-400">{{ $book->publisher ?? '-' }}</div>
                                 </td>
 
                                 <!-- Kategori -->
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-bold bg-royal-50 text-royal-700 border border-royal-200/80">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-bold border {{ $book->category?->badge_class ?? 'bg-royal-50 text-royal-700 border-royal-200/80' }}">
                                         {{ $book->category->name ?? 'Umum' }}
                                     </span>
                                 </td>
@@ -127,12 +154,12 @@
                                 <!-- Stok -->
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                     @if($book->stock > 0)
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-xs">
                                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5"></span>
-                                            {{ $book->stock }} Eksemplar
+                                            {{ $book->stock }} Buku
                                         </span>
                                     @else
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 shadow-xs">
                                             <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mr-1.5"></span>
                                             Habis
                                         </span>
@@ -141,7 +168,7 @@
 
                                 <!-- Actions -->
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                    <div class="flex items-center justify-center space-x-2">
+                                    <div class="flex items-center justify-center space-x-1.5">
                                         <!-- Edit -->
                                         <a href="{{ route('admin.books.edit', $book) }}"
                                            title="Ubah Buku"

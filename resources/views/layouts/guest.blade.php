@@ -15,24 +15,27 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-[#F8FAFC] min-h-screen text-slate-800 p-4 sm:p-6 flex flex-col justify-center items-center selection:bg-royal-700 selection:text-white">
+    <body class="font-sans antialiased bg-[#F8FAFC] min-h-screen text-slate-800 p-4 sm:p-6 flex flex-col justify-center items-center selection:bg-royal-700 selection:text-white relative overflow-x-hidden">
+        <!-- Subtle Academic Decorative Background Glow -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-72 bg-gradient-to-b from-royal-100/50 via-royal-50/20 to-transparent blur-3xl pointer-events-none"></div>
+
         <!-- Main Guest Container -->
-        <div class="w-full max-w-md mx-auto my-auto py-8">
-            <!-- Brand Logo -->
+        <div class="w-full max-w-md mx-auto my-auto py-6 relative z-10">
+            <!-- Brand Logo & Header -->
             <div class="mb-6 flex flex-col items-center text-center">
-                <a href="{{ url('/') }}" class="inline-flex items-center space-x-3 mb-2 group">
-                    <div class="w-12 h-12 rounded-2xl overflow-hidden flex items-center justify-center bg-royal-50 border border-royal-200/80 p-1.5 shadow-royal-sm transition-transform duration-200 group-hover:scale-105">
-                        <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="w-full h-full object-contain rounded-xl">
+                <a href="{{ url('/') }}" class="flex flex-col items-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-royal-50 border border-royal-200/80 p-2 shadow-royal-xs transition-transform duration-200 group-hover:scale-105 mb-2.5 flex items-center justify-center">
+                        <img src="{{ asset('images/logo.jpg') }}" alt="Logo Gunadarma" class="w-full h-full object-contain">
                     </div>
-                    <div class="flex flex-col text-left leading-tight">
-                        <span class="font-extrabold text-base tracking-wider text-slate-900 uppercase">GUNADARMA</span>
-                        <span class="text-[11px] font-bold tracking-wider uppercase text-royal-700">PERPUSTAKAAN DIGITAL</span>
+                    <div class="flex flex-col items-center leading-tight">
+                        <span class="font-extrabold text-lg sm:text-xl tracking-wider text-slate-900 uppercase">GUNADARMA</span>
+                        <span class="text-xs font-extrabold tracking-widest uppercase text-royal-700 mt-0.5">PERPUSTAKAAN DIGITAL</span>
                     </div>
                 </a>
             </div>
 
             <!-- Card Container -->
-            <div class="bg-white rounded-2xl p-7 sm:p-9 shadow-xs border border-slate-200/80">
+            <div class="bg-white rounded-3xl p-7 sm:p-9 shadow-card border border-slate-200/80">
                 {{ $slot }}
             </div>
 

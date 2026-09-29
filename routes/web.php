@@ -27,6 +27,9 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'role:peminjam,admin'])->group(function () {
     Route::get('/katalog', [BookCatalogController::class, 'index'])->name('peminjam.catalog.index');
     Route::get('/katalog/search', [BookCatalogController::class, 'search'])->name('peminjam.catalog.search');
+});
+
+Route::middleware(['auth', 'role:peminjam'])->group(function () {
     Route::post('/katalog/pinjam/{book}', [BorrowingController::class, 'borrow'])->name('peminjam.borrowings.borrow');
     Route::get('/riwayat-saya', [BorrowingController::class, 'history'])->name('peminjam.borrowings.history');
     Route::post('/riwayat-saya/kembalikan/{borrowing}', [BorrowingController::class, 'returnBook'])->name('peminjam.borrowings.return');
@@ -34,6 +37,7 @@ Route::middleware(['auth', 'role:peminjam,admin'])->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/stats', [AdminDashboardController::class, 'stats'])->name('dashboard.stats');
     Route::resource('books', AdminBookController::class)->except(['show']);
     Route::get('/transaksi', [BorrowingMonitorController::class, 'index'])->name('borrowings.index');
 });

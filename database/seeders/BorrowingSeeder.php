@@ -11,8 +11,8 @@ class BorrowingSeeder extends Seeder
 {
     public function run(): void
     {
-        $budi = User::where('email', 'budi@gunadarma.ac.id')->first();
-        if (!$budi) {
+        $depdan = User::where('email', 'depdan@gunadarma.ac.id')->first();
+        if (!$depdan) {
             return;
         }
 
@@ -23,7 +23,7 @@ class BorrowingSeeder extends Seeder
         if ($cleanCode) {
             Borrowing::updateOrCreate(
                 [
-                    'user_id' => $budi->id,
+                    'user_id' => $depdan->id,
                     'book_id' => $cleanCode->id,
                     'status' => 'dipinjam',
                 ],
@@ -39,7 +39,7 @@ class BorrowingSeeder extends Seeder
         if ($techBook) {
             Borrowing::updateOrCreate(
                 [
-                    'user_id' => $budi->id,
+                    'user_id' => $depdan->id,
                     'book_id' => $techBook->id,
                     'status' => 'dikembalikan',
                 ],
@@ -55,7 +55,7 @@ class BorrowingSeeder extends Seeder
         if ($cyberBook) {
             Borrowing::updateOrCreate(
                 [
-                    'user_id' => $budi->id,
+                    'user_id' => $depdan->id,
                     'book_id' => $cyberBook->id,
                     'status' => 'dikembalikan',
                 ],

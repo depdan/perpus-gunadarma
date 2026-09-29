@@ -34,7 +34,14 @@
 
         <!-- Password -->
         <div>
-            <label for="password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Kata Sandi</label>
+            <div class="flex items-center justify-between mb-1.5">
+                <label for="password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Kata Sandi</label>
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}" class="text-[11px] text-royal-700 hover:text-royal-800 font-semibold hover:underline">
+                        Lupa kata sandi?
+                    </a>
+                @endif
+            </div>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,30 +76,4 @@
             Masuk ke Perpustakaan
         </button>
     </form>
-
-    <!-- Demo Account Helper -->
-    <div class="mt-6 pt-5 border-t border-slate-100 text-xs">
-        <p class="font-bold text-slate-400 mb-2.5 text-center text-[10px] uppercase tracking-wider">⚡ Akses Cepat Uji Coba:</p>
-        <div class="grid grid-cols-2 gap-2">
-            <button type="button"
-                    onclick="document.getElementById('email').value='admin@gunadarma.ac.id'; document.getElementById('password').value='password';"
-                    class="p-2.5 bg-slate-50 hover:bg-royal-50 border border-slate-200/80 hover:border-royal-200 rounded-xl text-left transition cursor-pointer">
-                <div class="font-bold text-slate-900 text-xs flex items-center">
-                    <span>👑 Admin</span>
-                </div>
-                <div class="text-[10px] text-slate-500 truncate">admin@gunadarma.ac.id</div>
-                <div class="text-[9px] text-royal-700 font-semibold">pass: password</div>
-            </button>
-
-            <button type="button"
-                    onclick="document.getElementById('email').value='budi@gunadarma.ac.id'; document.getElementById('password').value='password';"
-                    class="p-2.5 bg-slate-50 hover:bg-royal-50 border border-slate-200/80 hover:border-royal-200 rounded-xl text-left transition cursor-pointer">
-                <div class="font-bold text-slate-900 text-xs flex items-center">
-                    <span>👤 Peminjam</span>
-                </div>
-                <div class="text-[10px] text-slate-500 truncate">budi@gunadarma.ac.id</div>
-                <div class="text-[9px] text-royal-700 font-semibold">pass: password</div>
-            </button>
-        </div>
-    </div>
 </x-guest-layout>

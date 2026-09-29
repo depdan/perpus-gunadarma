@@ -44,7 +44,7 @@ Aplikasi sistem peminjaman buku perpustakaan berbasis web yang dikembangkan meng
 | Peran | Alamat Email | Kata Sandi | Akses Route |
 | :--- | :--- | :--- | :--- |
 | **Admin** | `admin@gunadarma.ac.id` | `password` | `/admin/dashboard` |
-| **Peminjam** | `budi@gunadarma.ac.id` | `password` | `/katalog` |
+| **Peminjam** | `depdan@gunadarma.ac.id` | `password` | `/katalog` |
 
 > *Catatan: Anda juga dapat membuat akun baru melalui halaman Registrasi (`/register`), yang secara otomatis akan mendapatkan peran sebagai Peminjam.*
 

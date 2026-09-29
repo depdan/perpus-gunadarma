@@ -9,7 +9,12 @@ $alignmentClasses = match ($align) {
 
 $width = match ($width) {
     '48' => 'w-48',
-    default => $width,
+    '56' => 'w-56',
+    '60' => 'w-60',
+    '64' => 'w-64',
+    '72' => 'w-72',
+    '80' => 'w-80',
+    default => str_starts_with($width, 'w-') ? $width : 'w-' . $width,
 };
 @endphp
 
@@ -25,10 +30,10 @@ $width = match ($width) {
             x-transition:leave="transition ease-in duration-75"
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95"
-            class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }}"
+            class="absolute z-50 mt-2 {{ $width }} rounded-2xl shadow-xl border border-slate-200/80 bg-white {{ $alignmentClasses }}"
             style="display: none;"
             @click="open = false">
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
+        <div class="rounded-2xl overflow-hidden {{ $contentClasses }}">
             {{ $content }}
         </div>
     </div>

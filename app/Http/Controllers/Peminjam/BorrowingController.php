@@ -17,6 +17,9 @@ class BorrowingController extends Controller
     public function borrow(Request $request, Book $book): RedirectResponse
     {
         $user = Auth::user();
+        if ($user->isAdmin()) {
+            return redirect()->back()->with('error', 'Akun Administrator tidak dapat meminjam buku. Gunakan akun Peminjam / Mahasiswa untuk meminjam buku.');
+        }
 
         $validated = $request->validate([
             'duration' => ['nullable', 'integer', 'in:3,7,14,30'],
